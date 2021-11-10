@@ -1,0 +1,16 @@
+:root {
+  --background-gray: #e5e5e5;
+}
+
+body {
+  background-color: var(--background-gray);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  background-color: var(--background-gray);
+  border: 1px solid #333;
+}

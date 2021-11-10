@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Add Post
+{% endblock %}
+
+{% block content %}
+  <h1>Add post</h1>
+  <form method="POST">
+    <textarea
+      name="text"
+      id="text"
+      class="form-control mb-3"
+      placeholder="Post content..."></textarea>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+{% endblock %}

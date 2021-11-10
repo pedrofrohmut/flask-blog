@@ -1,0 +1,15 @@
+
+
+NVIM v0.5.1
+Build type: Release
+LuaJIT 2.0.5
+Compilation: /usr/bin/cc -D_FORTIFY_SOURCE=2 -march=x86-64 -mtune=generic -O2 -pipe -fno-plt -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=1 -DNVIM_TS_HAS_SET_MATCH_LIMIT -O2 -DNDEBUG -Wall -Wextra -pedantic -Wno-unused-parameter -Wstrict-prototypes -std=gnu99 -Wshadow -Wconversion -Wmissing-prototypes -Wimplicit-fallthrough -Wvla -fstack-protector-strong -fno-common -fdiagnostics-color=always -DINCLUDE_GENERATED_DECLARATIONS -D_GNU_SOURCE -DNVIM_MSGPACK_HAS_FLOAT32 -DNVIM_UNIBI_HAS_VAR_FROM -DMIN_LOG_LEVEL=3 -I/build/neovim/src/neovim-0.5.1/build/config -I/build/neovim/src/neovim-0.5.1/src -I/usr/include -I/build/neovim/src/neovim-0.5.1/build/src/nvim/auto -I/build/neovim/src/neovim-0.5.1/build/include
+Compilado por builduser
+
+Features: +acl +iconv +tui
+See ":help feature-compile"
+
+    arquivo vimrc de sistema: "$VIM/sysinit.vim"
+            padrão para $VIM: "/usr/share/nvim"
+
+Run :checkhealth for more info

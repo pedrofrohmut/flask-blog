@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Home
+{% endblock %}
+
+{% block content %}
+  <h1 class="mb-4">Posts</h1>
+  
+  {% for post in posts %}
+    <div class="card corder-dark mb-3">
+      
+      <!-- Card Header -->
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <a href="/posts/{{ post.user.username }}">{{ post.user.username }}</a>
+        
+        {% if user.id == post.user_id %}
+          <!-- Dropdown options -->
+          <div class="dropdown">
+            <button 
+                class="btn btn-light"
+                type="button" 
+                id="dropdown1" 
+                data-bs-toggle="dropdown" 
+                aria-expanded="false">
+              ...
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdown1">
+              <li>
+                <a class="dropdown-item" href="/posts/delete/{{ post.id }}">Delete</a>
+              </li>
+            </ul>
+          </div>
+        {% endif %}
+      </div>
+      
+      <!-- Card Body -->
+      <div class="card-body">
+        <div class="card-text mb-3">{{ post.content }}</div>
+        
+        <!-- Add Comment Form -->
+        <form action="/comments" method="POST">
+          <div class="input-group mb-2">
+            <input 
+                type="text" 
+                id="commentText" 
+                name="commentText" 
+                class="form-control bg-light" 
+                placeholder="Place your comment here"
+            />
+            <input type="hidden" name="postId" value="{{ post.id }}" />
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+
+        <!-- Comments Collapse -->
+        {% if post.comments %}
+          <a 
+              class="fs-6 text-muted"
+              style="opacity: 0.6"
+              data-bs-toggle="collapse" 
+              href="#collapse_{{ post.id }}" 
+              role="button" 
+              aria-expanded="false" 
+              aria-controls="collapseExample">
+            Show {{ post.comments|length }} comments
+          </a>
+          <div class="collapse mt-3" id="collapse_{{ post.id }}">
+            <ul class="list-group">
+              <!-- List Comments -->
+              {% for comment in post.comments %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <div>{{ comment.content }}</div>
+                  <div>
+                    {% if user.id == comment.user_id %}
+                      <!-- Dropdown options -->
+                      <div class="dropdown">
+                        <button 
+                            class="btn btn-light" 
+                            type="button" 
+                            id="dropdown_{{ comment.id }}" 
+                            data-bs-toggle="dropdown" 
+                            aria-expanded="false">
+                          ...
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdown">
+                          <li>
+                            <a 
+                                class="dropdown-item" 
+                                href="/comments/delete/{{ comment.id }}">
+                              Delete
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    {% endif %}
+                  </div>
+                </li>
+              {% endfor %}
+            </ul>
+          </div> <!-- Collapse -->
+        {% endif %}
+      </div> <!-- /CardBody -->
+      
+      <!-- Card Footer -->
+      <div class="card-footer text-muted d-flex justify-content-between">
+        <div>
+          <form action="/likes/toggle" method="POST">
+            <input type="hidden" name="postId" value={{ post.id }} />
+            <input type="hidden" name="userId" value={{ user.id }} />
+            <button class="btn btn-light">
+              <span class="pe-1">{{ post.likes|length }}</span>
+              {% if post.liked %}
+                <i class="fas fa-thumbs-up"></i>
+              {% else %}
+                <i class="far fa-thumbs-up"></i>
+              {% endif %}
+            </button>
+          </form>
+        </div>
+        <div>{{ post.created_at }}</div>
+      </div>
+    </div>
+  {% endfor %}
+{% endblock %}
